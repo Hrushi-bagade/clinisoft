@@ -1,37 +1,86 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import logoo from "./images/logoo.png";
 
 const SignUp = () => {
-  const [PhoneNumber, setPhoneNumber] = useState("");
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
-  const [Address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [Password, Setpassword] = useState("");
-  const [ConfirmPassword, SetConfirmPassword] = useState("");
-  
-  const handelsubmit=(e)=>{
+  const [formData, setFormData] = useState({
+    PhoneNumber: "",
+    FirstName: "",
+    LastName: "",
+    Address: "",
+    email: "",
+    Password: "",
+    ConfirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
-  }
+    console.log(formData.email);
+  };
+
   return (
     <div className="Plogin">
-    <img className="logo-img" src={logoo} alt=""/>
-      <form className="Passwordlogin" onSubmit={handelsubmit} >
+      <img className="logo-img" src={logoo} alt="" />
+      <form className="Passwordlogin" onSubmit={handleSubmit}>
         <h4>Make Your Account</h4>
-        <input  value={PhoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)} placeholder="Phone Number" />
-        <input  value={FirstName} onChange={(e)=>setFirstName(e.target.value)} placeholder="First Name" />
-        <input  value={LastName} onChange={(e)=>setLastName(e.target.value)} placeholder="Last Name" />
-        <input  value={Address} onChange={(e)=>setAddress(e.target.value)} placeholder="Address" />
-        <input  value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" />
-        <input value={Password} onChange={(e)=>Setpassword(e.target.value)} placeholder="Password" />
-        <input value={ConfirmPassword} onChange={(e)=>SetConfirmPassword(e.target.value)} placeholder="Confirm Password" />
-        <button className="loginbtn" type="submit">Sign Up</button>
-        <p>Already have an account ?<span><Link to="/"><button >Login here</button></Link></span></p>
+        <input
+          name="PhoneNumber"
+          value={formData.PhoneNumber}
+          onChange={handleChange}
+          placeholder="Phone Number"
+        />
+        <input
+          name="FirstName"
+          value={formData.FirstName}
+          onChange={handleChange}
+          placeholder="First Name"
+        />
+        <input
+          name="LastName"
+          value={formData.LastName}
+          onChange={handleChange}
+          placeholder="Last Name"
+        />
+        <input
+          name="Address"
+          value={formData.Address}
+          onChange={handleChange}
+          placeholder="Address"
+        />
+        <input
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+        />
+        <input
+          name="Password"
+          value={formData.Password}
+          onChange={handleChange}
+          placeholder="Password"
+        />
+        <input
+          name="ConfirmPassword"
+          value={formData.ConfirmPassword}
+          onChange={handleChange}
+          placeholder="Confirm Password"
+        />
+        <button className="loginbtn" type="submit">
+          Sign Up
+        </button>
+        <p>
+          Already have an account ?<span><Link to="/">Login here</Link></span>
+        </p>
       </form>
     </div>
   );
